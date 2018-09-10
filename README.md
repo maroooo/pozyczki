@@ -12,7 +12,7 @@ Aplikacja będzie mieć możliwość podziału na kategorie (pieniądze, książ
 | :---         |     :---:      |     :---:      |          ---: |
 | Marek Ślósarczyk | 175165 | KrDUIs2011Is | Tak |
 | Michał Feuer | 166567 | KrDUIs2011Is | - |
-| Łukasz Luty | 117496 | - | - |
+| Łukasz Luty | 117496 | KrDUIs2012Is | - |
 
 ## System zarządzania projektem - Trello
 https://trello.com/b/zOJAcd9V/bai-pożyczki
@@ -23,3 +23,8 @@ https://marvelapp.com - to program w którym został wykonany prototyp aplikacji
 Link do prototypu aplikacji Pożyczki:
 
 https://marvelapp.com/3gidh4c/screen/43391265
+
+## Raport wykonanych prac
+
+| Zadanie | Osoba/y, która wykonywała | Czas pracy |
+| :---         |     :---:      |          ---: |
