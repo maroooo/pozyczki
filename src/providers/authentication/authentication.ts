@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from '../../models/user/user';
 
 /*
   Generated class for the AuthenticationProvider provider.
@@ -10,7 +11,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class AuthenticationProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(private angularAuth: AngularFireAuth) {
     console.log('Hello AuthenticationProvider Provider');
   }
 
