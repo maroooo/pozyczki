@@ -17,4 +17,21 @@ export class ItemsProvider {
     console.log('Hello ItemsProvider Provider');
   }
 
+  createItem(name: string,
+    user_id: string,
+    state: string, 
+    category: string, 
+    person: string, 
+    startDate: string, 
+    endDate: string, 
+    comment: string,
+    image: string
+  ): Promise<void> {
+    const id = this.fireStore.createId();
+
+    return this.fireStore.doc(`items/${id}`).set({
+      id, user_id, name, state, category, person, startDate, endDate, comment, image
+    });
+  }
+
 }
