@@ -14,5 +14,55 @@
 
 
 <ion-content padding>
-
+	<form [formGroup]="addItemForm" (submit)="addItem()" novalidate>
+    <ion-item>
+      <ion-label fixed>Nazwa:</ion-label>
+      <ion-input formControlName="name" type="text" placeholder="Podaj nazwe"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Typ:</ion-label>
+      <ion-select formControlName="state">
+        <ion-option *ngFor="let condition of states" [value]="condition" placholder="Wybierz opcje">{{condition}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Kategoria:</ion-label>
+      <ion-select formControlName="category">
+        <ion-option *ngFor="let cat of categories" [value]="cat" placholder="Wybierz opcje">{{cat}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Osoba:</ion-label>
+      <ion-select formControlName="person">
+        <ion-option *ngFor="let guy of contactsList" [value]="guy" placholder="Wybierz opcje">{{guy}}</ion-option>
+      </ion-select>
+    </ion-item>   
+    <ion-item>
+      <ion-label>Start</ion-label>
+      <ion-datetime formControlName="startDate" displayFormat="H:mm, DDDD-MMM-YYYY" pickerFormat="H:mm, DDDD-MMM-YYYY"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Koniec</ion-label>
+      <ion-datetime formControlName="endDate" displayFormat="H:mm, DDDD-MMM-YYYY" pickerFormat="H:mm, DDDD-MMM-YYYY"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-input formControlName="comment" placeholder="Zostaw Komentarz"></ion-input>
+  </ion-item>
+    <button ion-button block type="submit" [disabled]="!addItemForm.valid">
+      Dodaj 
+    </button>
+  </form>
+    <ion-item>
+       <ion-row>
+        <ion-col col-6> 
+          <button ion-button block (click)="takePicture()"><b>Zrób zdjęcie</b></button>
+          <img [src]="image64" *ngIf="image64" />
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button block (click)="getPicture()" >
+            <b>Dodaj zdjęcie</b>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-item> 
 </ion-content>
