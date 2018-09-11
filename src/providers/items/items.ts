@@ -34,4 +34,8 @@ export class ItemsProvider {
     });
   }
 
+  // Funkcja zwraca wszystkie przedmioty użytkownika o podanym 'user_id'
+  getItemsList(user_id) {
+    return this.fireStore.collection('items', ref => ref.where('user_id', '==', user_id)); 
+  }
 }
