@@ -11,4 +11,9 @@ export class HomePage {
 
   }
 
+  goToAddItemPage() {
+    console.log("Move to AddItemPage");
+    this.navCtrl.push('AddItemPage');
+  }
+
 }
