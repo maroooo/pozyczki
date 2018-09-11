@@ -28,3 +28,7 @@ https://marvelapp.com/3gidh4c/screen/43391265
 
 | Zadanie | Osoba/y, która wykonywała | Czas pracy |
 | :---         |     :---:      |          ---: |
+| Instalacja i konfiguracja frameworku Ionic | Marek Ślósarczyk, Michał Feuer, Łukasz Luty | 4 |
+| Przygotowanie prototypu aplikacji | Marek Ślósarczyk | 9 |
+| Przygotowanie i stworzenie szkieletu aplikacji w frameworku Ionic | Marek Ślósarczyk | 1,5 |
+| Opracowanie uwierzytelniania użytkownika z pomocą Firebase Authentication | Michał Feuer | 4 |
