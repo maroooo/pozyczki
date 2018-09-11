@@ -37,5 +37,19 @@ export class CameraProvider {
     });
   }
 
-
+  galleryOptions: CameraOptions = {
+      quality: 100,
+      targetWidth: 900,
+      targetHeight: 600,
+      sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+      destinationType: this.camera.DestinationType.DATA_URL
+  }
+  
+  openGallery() {
+    this.camera.getPicture(this.galleryOptions).then((imageData) => {
+        this.image = "data:image/jpeg;base64," + imageData;
+    }, (err) => {
+        console.log(err);
+    });
+  }
 }
