@@ -16,6 +16,8 @@ import { User } from '../../models/user/user'
 })
 export class LoginPage {
 
+	error;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
