@@ -18,7 +18,7 @@ export class AuthenticationProvider {
   constructor(private angularAuth: AngularFireAuth) {
     console.log('Hello AuthenticationProvider Provider');
      this.user = angularAuth.authState;
-        this.user.subscribe(
+     this.user.subscribe(
             (user) => {
                 if (user) {
                     this.userDetails = user;
@@ -32,7 +32,19 @@ export class AuthenticationProvider {
   }
 
   getAuthState(){
-        return this.angularAuth.authState;
+    return this.angularAuth.authState;
+  }
+
+  login(user: User) {
+		return this.angularAuth.auth.signInWithEmailAndPassword(user.email, user.password)
+	}
+
+	register(user: User) {
+        return this.angularAuth.auth.createUserWithEmailAndPassword(user.email,user.password);
+  }
+
+  logout() {
+        this.angularAuth.auth.signOut();
   }
 
 }
