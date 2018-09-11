@@ -25,6 +25,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 // Konfiguracja konta firebase
 import { environment } from '../environments/firebaseConfig';
 import { ItemsProvider } from '../providers/items/items';
+import { CameraProvider } from '../providers/camera/camera';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ItemsProvider } from '../providers/items/items';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthenticationProvider,
-    ItemsProvider
+    ItemsProvider,
+    CameraProvider
   ]
 })
 export class AppModule {}

@@ -33,7 +33,4 @@ https://marvelapp.com/3gidh4c/screen/43391265
 | Przygotowanie i stworzenie szkieletu aplikacji w frameworku Ionic | Marek Ślósarczyk | 1,5 |
 | Opracowanie uwierzytelniania użytkownika z pomocą Firebase Authentication | Michał Feuer | 4 |
 | Opracowanie sekcji tworzenia nowych przedmiotów z wykorzystaniem bazy danych Cloud Firestore | Łukasz Luty | 3 |
-<<<<<<< HEAD
 | Dodanie pluginu obsługującego aparat | Łukasz Luty | - |
-=======
->>>>>>> 23523644026055cc152bc7b2f7f9edce55bcd55b
