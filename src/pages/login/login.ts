@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { User } from '../../models/user/user'
 
 /**
  * Generated class for the LoginPage page.
@@ -20,6 +21,16 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  user = {
+		email : '',
+		password : '',
+	} as User;
+
+	goToRegisterPage() {
+    console.log("Move to SignupPage");
+    this.navCtrl.push('SignupPage');
   }
 
 }
