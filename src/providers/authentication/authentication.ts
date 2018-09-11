@@ -47,4 +47,10 @@ export class AuthenticationProvider {
         this.angularAuth.auth.signOut();
   }
 
+  getUserId() {
+        if (this.userDetails != null) {
+            return this.userDetails.uid;
+        }
+    }
+
 }
