@@ -24,6 +24,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // Konfiguracja konta firebase
 import { environment } from '../environments/firebaseConfig';
+import { ItemsProvider } from '../providers/items/items';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { environment } from '../environments/firebaseConfig';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthenticationProvider
+    AuthenticationProvider,
+    ItemsProvider
   ]
 })
 export class AppModule {}
