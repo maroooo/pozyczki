@@ -7,12 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>login</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+	<ion-item>
+	    <ion-label floating>Email</ion-label>
+	    <ion-input type="text"></ion-input>
+  	</ion-item>
+  	<ion-item>
+	    <ion-label floating>Hasło</ion-label>
+	    <ion-input type="password"></ion-input>
+	</ion-item>
 
+	<button ion-button block>Login</button>
+	<button ion-button block>Rejestracja</button>
+
+	<p ion-text color="danger">{{error}}</p>
 </ion-content>
