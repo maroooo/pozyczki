@@ -22,6 +22,9 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
+// Konfiguracja konta firebase
+import { environment } from '../environments/firebaseConfig';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -33,7 +36,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(),
+    AngularFireModule.initializeApp(environment.firebase), // Inicjalizacja Firebase przy pomocy danych z console.firebase.google.com
     AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
