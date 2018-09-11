@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Item } from '../../models/item/item';
+import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { AuthenticationProvider } from '../../providers/authentication/authentication';
+import { ItemsProvider } from '../../providers/items/items';
 /**
  * Generated class for the AddItemPage page.
  *
@@ -15,11 +18,78 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AddItemPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	addItemForm: FormGroup;
+
+  constructor(public navCtrl: NavController,
+  						public loadingCtrl: LoadingController, 
+  						public navParams: NavParams,
+  						private formBuilder: FormBuilder,
+  						public itemsProvider: ItemsProvider,
+  						private userProvider: AuthenticationProvider) {
+  	this.addItemForm = formBuilder.group({
+      name: ['', Validators.compose([Validators.required])],
+      state: ['', Validators.compose([Validators.required])],
+      category: ['', Validators.compose([Validators.required])],
+      person: '',
+      startDate: ['', Validators.compose([Validators.required])],
+      endDate: ['', Validators.compose([Validators.required])],
+      comment: ''
+    })
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddItemPage');
   }
 
+  item: Item = {
+    id: '',
+    uid: '',
+    name: '',
+    state: '',
+    category: '',
+    person: '',
+    startDate: '',
+    endDate: '',
+    comment: '',
+    image: ''
+  }
+
+  contactsList = ['Adam Nowak', 'Maciek', 'Jan Kowalski', 'Adam Małysz', 'Monika Bąk', 'Kapitan', 'Mama', 'Najlepszy Brat'];
+  categories = ['pieniądze', 'książka', 'narzędzia', 'urządzenia', 'samochód'];
+  states = ['wypożyczam', 'pożyczam'];
+
+  async addItem() {
+  	const loading = await this.loadingCtrl.create();
+    const userId = this.userProvider.getUserId();
+    const name = this.addItemForm.value.name;
+    const state = this.addItemForm.value.state;
+    const category = this.addItemForm.value.category;
+    const person = this.addItemForm.value.person;
+    const startDate = this.addItemForm.value.startDate;
+    const endDate = this.addItemForm.value.endDate;
+    const comment = this.addItemForm.value.comment;
+    this.itemsProvider
+      .createItem(name, userId, state, category, person, startDate, endDate, comment)
+      .then(
+        () => {
+          loading.dismiss().then(() => {
+            this.navCtrl.popToRoot();
+          });
+        },
+        error => {
+          console.error(error);
+        }
+      );
+
+    return await this.navCtrl.popToRoot();
+
+  }
+
+  takePicture() {
+
+  }
+
+  getPicture() {
+
+  }
 }
