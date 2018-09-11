@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+
+// Model przedmiotu
 import { Item } from '../../models/item/item';
+// Biblioteka odpowiedzialna za stworzenie i walidacje formularza nowo tworzonego przedmiotu
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+// Providery
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { ItemsProvider } from '../../providers/items/items';
+import { CameraProvider  } from '../../providers/camera/camera';
 /**
  * Generated class for the AddItemPage page.
  *
@@ -25,7 +30,9 @@ export class AddItemPage {
   						public navParams: NavParams,
   						private formBuilder: FormBuilder,
   						public itemsProvider: ItemsProvider,
-  						private userProvider: AuthenticationProvider) {
+  						private userProvider: AuthenticationProvider,
+              public camera: CameraProvider
+              ) {
   	this.addItemForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
       state: ['', Validators.compose([Validators.required])],
@@ -54,9 +61,10 @@ export class AddItemPage {
     image: ''
   }
 
-  contactsList = ['Adam Nowak', 'Maciek', 'Jan Kowalski', 'Adam Małysz', 'Monika Bąk', 'Kapitan', 'Mama', 'Najlepszy Brat'];
+  contactsList = ['Adam Nowak', 'Maciek', 'Jan Kowalski', 'Adam Małysz', 'Monika Bąk', 'Kapitan', 'Mama', 'Najlepszy Brat', 'Obywatel GC'];
   categories = ['pieniądze', 'książka', 'narzędzia', 'urządzenia', 'samochód'];
   states = ['wypożyczam', 'pożyczam'];
+  defaultImg = this.camera.defaultImage;
 
   async addItem() {
   	const loading = await this.loadingCtrl.create();
@@ -68,8 +76,9 @@ export class AddItemPage {
     const startDate = this.addItemForm.value.startDate;
     const endDate = this.addItemForm.value.endDate;
     const comment = this.addItemForm.value.comment;
+    const image = this.defaultImg;
     this.itemsProvider
-      .createItem(name, userId, state, category, person, startDate, endDate, comment)
+      .createItem(name, userId, state, category, person, startDate, endDate, comment, image)
       .then(
         () => {
           loading.dismiss().then(() => {
@@ -86,7 +95,8 @@ export class AddItemPage {
   }
 
   takePicture() {
-
+    this.camera.takePicture();
+    this.defaultImg = this.camera.image;
   }
 
   getPicture() {
