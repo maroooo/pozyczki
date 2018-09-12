@@ -46,4 +46,8 @@ export class ItemsProvider {
   deleteItem(itemId: string): Promise<void> {
     return this.firestoreDB.doc(itemId).delete();
   }
+
+  getItemDetail(itemId: string) {
+    
+  }
 }
