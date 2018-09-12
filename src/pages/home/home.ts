@@ -58,4 +58,8 @@ export class HomePage {
 
   	await alert.present();
   }
+
+  goToDetailPage(item) {
+  	this.navCtrl.push('DetailPage', {i: item, id: item.id});
+  }
 }
