@@ -48,6 +48,10 @@ export class ItemsProvider {
   }
 
   getItemDetail(itemId: string) {
-    
+    return this.firestoreDB.doc(itemId);
+  }
+
+  createId() {
+    return this.fireStore.createId();
   }
 }
