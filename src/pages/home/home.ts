@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { AuthenticationProvider } from '../../providers/authentication/authentication'
 import { ItemsProvider } from '../../providers/items/items';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'page-home',
@@ -12,7 +13,8 @@ export class HomePage {
   constructor(public navCtrl: NavController, 
   						private firestoreProvider: ItemsProvider, 
   						private userProvider: AuthenticationProvider,
-  						public alertCtrl: AlertController) {
+  						public alertCtrl: AlertController,
+  						public _DomSanitizer: DomSanitizer) {
 
   }
 
