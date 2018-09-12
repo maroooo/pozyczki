@@ -7,12 +7,26 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>itemDetails</ion-title>
+    <ion-title>Opis przedmiotu</ion-title>
   </ion-navbar>
 
 </ion-header>
+	<ion-content text-center>
+		<img width="220" [src]="_DomSanitizer.bypassSecurityTrustResourceUrl(item.image)" />
+			<h1>{{ item.name }}</h1>
+		<ion-item>
+			<h1>Stan: <b>{{ item.state }}</b></h1>
+		</ion-item>
+		<ion-item>
+			<h1>Kategoria: <b>{{ item.category }}</b></h1>
+		</ion-item>
+		<ion-item>
+			<h1><b>{{ item.person }}</b></h1>
+		</ion-item>
 
-
-<ion-content padding>
-
+			<!-- <button ion-button color='secondary' (click)="goToEditPage(itemId)" large>Edytuj
+		    </button> -->
+			<button ion-button color='danger' (click)="deleteItem(itemId)" large>Usuń
+		    </button>
+	</ion-content>
 </ion-content>
