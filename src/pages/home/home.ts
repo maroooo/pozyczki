@@ -36,29 +36,6 @@ export class HomePage {
     this.navCtrl.push('AddItemPage');
   }
 
-  async deleteItem(itemId) {
-  	const alert = await this.alertCtrl.create({
-  		message: 'Na pewno chcesz usunąć ten przedmiot?',
-  		buttons: [
-  			{
-  				text: 'Anuluj',
-  				role: 'cancel',
-  				handler: () => {
-  					console.log('Potwierdź: tak');
-  				},
-  			},
-  			{
-  				text: 'Tak',
-  				handler: () => {
-  					this.firestoreProvider.deleteItem(itemId);
-  				},
-  			},
-  		],
-  	});
-
-  	await alert.present();
-  }
-
   goToDetailPage(item) {
   	this.navCtrl.push('DetailPage', {i: item, id: item.id});
   }
