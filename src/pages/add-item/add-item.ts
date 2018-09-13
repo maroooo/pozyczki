@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Platform } from 'ionic-angular';
 
 // Model przedmiotu
 import { Item } from '../../models/item/item';
@@ -9,6 +9,9 @@ import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { AuthenticationProvider } from '../../providers/authentication/authentication';
 import { ItemsProvider } from '../../providers/items/items';
 import { CameraProvider  } from '../../providers/camera/camera';
+// Pluginy
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 /**
  * Generated class for the AddItemPage page.
  *
@@ -26,6 +29,7 @@ export class AddItemPage {
 	addItemForm: FormGroup;
 
   constructor(public navCtrl: NavController,
+              public platform: Platform,
               public alertCtrl: AlertController,
   						public loadingCtrl: LoadingController, 
   						public navParams: NavParams,
@@ -33,7 +37,8 @@ export class AddItemPage {
   						public itemsProvider: ItemsProvider,
   						private userProvider: AuthenticationProvider,
               public camera: CameraProvider,
-              private localNotifications: LocalNotifications
+              private localNotifications: LocalNotifications,
+              private contacts: Contacts,
               ) {
   	this.addItemForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -43,6 +48,10 @@ export class AddItemPage {
       startDate: ['', Validators.compose([Validators.required])],
       endDate: ['', Validators.compose([Validators.required])],
       comment: ''
+    })
+     this.platform.ready().then((readySource) => {
+      console.log('Platform ready from', readySource);
+      this.getContacts();
     })
   }
 
@@ -63,7 +72,7 @@ export class AddItemPage {
     image: ''
   }
 
-  contactsList = ['Adam Nowak', 'Maciek', 'Jan Kowalski', 'Adam Małysz', 'Monika Bąk', 'Kapitan', 'Mama', 'Najlepszy Brat', 'Obywatel GC'];
+  contactsList = [];
   categories = ['pieniądze', 'książka', 'narzędzia', 'urządzenia', 'samochód'];
   states = ['wypożyczam', 'pożyczam'];
   defaultImg = this.camera.defaultImage;
@@ -128,6 +137,13 @@ export class AddItemPage {
             alert.present();
         });
     }
+  }
+
+  getContacts(): void {
+    this.contacts.find(['name.formatted'], {filter: "", multiple: true})
+      .then(data => {
+        this.contactsList = data;
+    });
   }
 
 }
