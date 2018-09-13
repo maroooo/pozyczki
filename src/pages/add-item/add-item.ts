@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 
 // Model przedmiotu
 import { Item } from '../../models/item/item';
@@ -26,12 +26,14 @@ export class AddItemPage {
 	addItemForm: FormGroup;
 
   constructor(public navCtrl: NavController,
+              public alertCtrl: AlertController,
   						public loadingCtrl: LoadingController, 
   						public navParams: NavParams,
   						private formBuilder: FormBuilder,
   						public itemsProvider: ItemsProvider,
   						private userProvider: AuthenticationProvider,
-              public camera: CameraProvider
+              public camera: CameraProvider,
+              private localNotifications: LocalNotifications
               ) {
   	this.addItemForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -82,6 +84,7 @@ export class AddItemPage {
       .then(
         () => {
           loading.dismiss().then(() => {
+            this.addNotification(name, endDate);
             this.navCtrl.popToRoot();
           });
         },
@@ -102,4 +105,29 @@ export class AddItemPage {
   getPicture() {
 
   }
+
+  notifications: any[] = [];
+
+  addNotification(text, date) { 
+    let notification = 
+    {
+      //id: day.dayCode,
+      title: 'Tytuł',
+      text: "Przypomnienie o: " + text,
+      trigger: {at: new Date(new Date().getTime() + 3600)}
+    };
+   this.notifications.push(notification);
+   if(this.platform.is('cordova')){
+        this.localNotifications.cancelAll().then(() => {
+            this.localNotifications.schedule(this.notifications);
+            this.notifications = [];
+            let alert = this.alertCtrl.create({
+                title: 'Powiadomianie dodane',
+                buttons: ['Ok']
+            });
+            alert.present();
+        });
+    }
+  }
+
 }
