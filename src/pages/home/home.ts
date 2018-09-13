@@ -39,4 +39,16 @@ export class HomePage {
   goToDetailPage(item) {
   	this.navCtrl.push('DetailPage', {i: item, id: item.id});
   }
+
+  goToHomePage() {
+    this.navCtrl.push('ItemListPage');
+  }
+
+  goToAboutPage() {
+    this.navCtrl.push('AboutPage');
+  }
+
+  goToContactPage() {
+    this.navCtrl.push('ContactPage');
+  }
 }
