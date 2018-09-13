@@ -39,6 +39,7 @@ export class AddItemPage {
               public camera: CameraProvider,
               private localNotifications: LocalNotifications,
               private contacts: Contacts,
+              private contacts: Contacts
               ) {
   	this.addItemForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -112,7 +113,15 @@ export class AddItemPage {
   }
 
   getPicture() {
+    this.camera.openGallery();
+    this.defaultImg = this.camera.image;
+  }
 
+  getContacts(): void {
+    this.contacts.find(['name.formatted'], { filter: "", multiple: true })
+      .then(data => {
+        this.contactsList = data;
+      });
   }
 
   notifications: any[] = [];

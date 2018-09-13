@@ -33,4 +33,8 @@ https://marvelapp.com/3gidh4c/screen/43391265
 | Przygotowanie i stworzenie szkieletu aplikacji w frameworku Ionic | Marek Ślósarczyk | 1,5 |
 | Opracowanie uwierzytelniania użytkownika z pomocą Firebase Authentication | Michał Feuer | 4 |
 | Opracowanie sekcji tworzenia nowych przedmiotów z wykorzystaniem bazy danych Cloud Firestore | Łukasz Luty | 3 |
-| Dodanie pluginu obsługującego aparat | Łukasz Luty | - |
+| Dodanie pluginu obsługującego aparat | Łukasz Luty | 4 |
+| Instalacja i dodanie pluginu Contacts | Marek Ślósarczyk | 2 |
+| Zaprojektowanie, stworzenie i wygenerowanie ikony oraz ekranu startowego aplikacji | Marek Ślósarczyk, Michał Feuer, Łukasz Luty | 3 |
+| Edycja stron 'O nas' oraz 'Kontakt' | Łukasz Luty | 2 |
+| Instalacja i dodanie pluginu  Local Notifications | Michał Feuer | 3 |

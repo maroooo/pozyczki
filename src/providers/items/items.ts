@@ -34,4 +34,24 @@ export class ItemsProvider {
     });
   }
 
+  // Zmienna przechowująca naszą kolekcję 'items' z bazy danych Firestore
+  private firestoreDB = this.fireStore.collection('items');
+
+  // Funkcja zwraca wszystkie przedmioty użytkownika o podanym 'user_id'
+  getItemsList(user_id) {
+    return this.fireStore.collection('items', ref => ref.where('user_id', '==', user_id)); 
+  }
+
+  // Funkcja usuwa z kolekcji przedmiot o podanym id
+  deleteItem(itemId: string): Promise<void> {
+    return this.firestoreDB.doc(itemId).delete();
+  }
+
+  getItemDetail(itemId: string) {
+    return this.firestoreDB.doc(itemId);
+  }
+
+  createId() {
+    return this.fireStore.createId();
+  }
 }
