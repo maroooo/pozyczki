@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Platform } from 'ionic-angular';
 
 // Model przedmiotu
 import { Item } from '../../models/item/item';
@@ -10,6 +10,7 @@ import { AuthenticationProvider } from '../../providers/authentication/authentic
 import { ItemsProvider } from '../../providers/items/items';
 import { CameraProvider  } from '../../providers/camera/camera';
 // Pluginy
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 /**
  * Generated class for the AddItemPage page.
@@ -28,12 +29,16 @@ export class AddItemPage {
 	addItemForm: FormGroup;
 
   constructor(public navCtrl: NavController,
+              public platform: Platform,
+              public alertCtrl: AlertController,
   						public loadingCtrl: LoadingController, 
   						public navParams: NavParams,
   						private formBuilder: FormBuilder,
   						public itemsProvider: ItemsProvider,
   						private userProvider: AuthenticationProvider,
               public camera: CameraProvider,
+              private localNotifications: LocalNotifications,
+              private contacts: Contacts,
               private contacts: Contacts
               ) {
   	this.addItemForm = formBuilder.group({
@@ -44,6 +49,10 @@ export class AddItemPage {
       startDate: ['', Validators.compose([Validators.required])],
       endDate: ['', Validators.compose([Validators.required])],
       comment: ''
+    })
+     this.platform.ready().then((readySource) => {
+      console.log('Platform ready from', readySource);
+      this.getContacts();
     })
   }
 
@@ -85,6 +94,7 @@ export class AddItemPage {
       .then(
         () => {
           loading.dismiss().then(() => {
+            this.addNotification(name, endDate);
             this.navCtrl.popToRoot();
           });
         },
@@ -113,4 +123,36 @@ export class AddItemPage {
         this.contactsList = data;
       });
   }
+
+  notifications: any[] = [];
+
+  addNotification(text, date) { 
+    let notification = 
+    {
+      //id: day.dayCode,
+      title: 'Tytuł',
+      text: "Przypomnienie o: " + text,
+      trigger: {at: new Date(new Date().getTime() + 3600)}
+    };
+   this.notifications.push(notification);
+   if(this.platform.is('cordova')){
+        this.localNotifications.cancelAll().then(() => {
+            this.localNotifications.schedule(this.notifications);
+            this.notifications = [];
+            let alert = this.alertCtrl.create({
+                title: 'Powiadomianie dodane',
+                buttons: ['Ok']
+            });
+            alert.present();
+        });
+    }
+  }
+
+  getContacts(): void {
+    this.contacts.find(['name.formatted'], {filter: "", multiple: true})
+      .then(data => {
+        this.contactsList = data;
+    });
+  }
+
 }
