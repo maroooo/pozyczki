@@ -103,7 +103,8 @@ export class AddItemPage {
   }
 
   getPicture() {
-
+    this.camera.openGallery();
+    this.defaultImg = this.camera.image;
   }
 
   getContacts(): void {
