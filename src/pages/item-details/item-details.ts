@@ -57,7 +57,9 @@ export class ItemDetailsPage {
   	await alert.present();
   }
 
-  
+  goToEditPage(itemId) {
+    this.navCtrl.push('EditPage', {editId: itemId});
+  }
 
   
 }
