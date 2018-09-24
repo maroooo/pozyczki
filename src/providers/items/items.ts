@@ -13,6 +13,8 @@ import { Item } from '../../models/item/item';
 @Injectable()
 export class ItemsProvider {
 
+  private firestoreDB = this.fireStore.collection('items');
+  
   constructor(private fireStore: AngularFirestore) {
     console.log('Hello ItemsProvider Provider');
   }
@@ -34,6 +36,22 @@ export class ItemsProvider {
     });
   }
 
+
+  editItem(itemId, item) {
+    return this.firestoreDB.doc(itemId)
+      .update({
+        name: item.name,
+        state: item.state,
+        category: item.category,
+        person: item.person,
+        startDate: item.startDate,
+        endDate: item.endDate,
+        comment: item.comment,
+        image: item.image
+      });
+  }
+
+
   // Zmienna przechowująca naszą kolekcję 'items' z bazy danych Firestore
   private firestoreDB = this.fireStore.collection('items');
 
@@ -54,4 +72,5 @@ export class ItemsProvider {
   createId() {
     return this.fireStore.createId();
   }
+
 }
