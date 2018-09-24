@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
+import { Alert, AlertController, IonicPage, NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
 import { ItemsProvider } from '../../providers/items/items';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { CameraProvider  } from '../../providers/camera/camera';
 import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 /**
  * Generated class for the EditItemPage page.
  *
@@ -23,12 +24,14 @@ export class EditItemPage {
 	itemId: string;
   constructor(public navCtrl: NavController, 
   						public navParams: NavParams,
-  						public itemsProvider: FirebaseItemsProvider,
+              public alertCtrl: AlertController,
+  						public itemsProvider: ItemsProvider,
   						private formBuilder: FormBuilder,
   						private contacts: Contacts,
   						public platform: Platform,
   						public camera: CameraProvider,
   						public loadingCtrl: LoadingController,
+              public localNotifications: LocalNotifications
   						) {
   	this.editItemForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -41,7 +44,7 @@ export class EditItemPage {
     });
     this.platform.ready().then((readySource) => {
       console.log('Platform ready from', readySource);
-      //this.getContacts();
+      this.getContacts();
     });
     this.itemId = this.navParams.get("editId");
   }
@@ -50,16 +53,13 @@ export class EditItemPage {
     console.log('ionViewDidLoad EditPage');
   }
 
-
-
-
   allContacts = [];
   addItemForm: FormGroup;
   image64 = this.camera.defaultImage;
   
-  contactList = [];
+  contactsList = [];
   states = ['wypożyczam', 'pożyczam'];
-  categories = ['pieniądze', 'przedmiot']
+  categories = ['pieniądze', 'książka', 'narzędzia', 'urządzenia', 'samochód'];
 
   async editItem() {
     const loading = await this.loadingCtrl.create();
@@ -78,7 +78,6 @@ export class EditItemPage {
       .then(
         () => {
           loading.dismiss().then(() => {
-            //this.addNotification(name, endDate);
             this.navCtrl.popToRoot();
           });
         },
@@ -88,6 +87,16 @@ export class EditItemPage {
       );
 
     return await this.navCtrl.popToRoot();
+  }
+
+  getContacts(): void {
+    this.contacts.find(['displayName'], { filter: "", multiple: true })
+      .then(data => {
+        // this.contactsList = data;
+        for (var i=0 ; i < data.length; i++){
+          this.contactsList.push(data[i].displayName)
+        }
+    });
   }
 
 }
