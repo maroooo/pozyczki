@@ -39,7 +39,6 @@ export class AddItemPage {
               public camera: CameraProvider,
               private localNotifications: LocalNotifications,
               private contacts: Contacts,
-              private contacts: Contacts
               ) {
   	this.addItemForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -77,6 +76,7 @@ export class AddItemPage {
   categories = ['pieniądze', 'książka', 'narzędzia', 'urządzenia', 'samochód'];
   states = ['wypożyczam', 'pożyczam'];
   defaultImg = this.camera.defaultImage;
+  endDate: any;
 
   async addItem() {
   	const loading = await this.loadingCtrl.create();
@@ -86,15 +86,15 @@ export class AddItemPage {
     const category = this.addItemForm.value.category;
     const person = this.addItemForm.value.person;
     const startDate = this.addItemForm.value.startDate;
-    const endDate = this.addItemForm.value.endDate;
+    this.endDate = this.addItemForm.value.endDate;
     const comment = this.addItemForm.value.comment;
     const image = this.defaultImg;
     this.itemsProvider
-      .createItem(name, userId, state, category, person, startDate, endDate, comment, image)
+      .createItem(name, userId, state, category, person, startDate, this.endDate, comment, image)
       .then(
         () => {
           loading.dismiss().then(() => {
-            this.addNotification(name, endDate);
+            this.addNotification(name, this.endDate);
             this.navCtrl.popToRoot();
           });
         },
@@ -129,10 +129,17 @@ export class AddItemPage {
   addNotification(text, date) { 
     let notification = 
     {
-      //id: day.dayCode,
       title: 'Tytuł',
       text: "Przypomnienie o: " + text,
-      trigger: {at: new Date(new Date().getTime() + 3600)}
+      // { at: new Date(YYYY, MM, DD, hh, mm)}
+      // 'Number' zamienia otrzymaną datę z typu string na typ number/int "2018" => 2018
+      trigger: {at: new Date(
+                Number(date.slice(0,4)), // YYYY
+                Number(date.slice(5,7)),  // MM
+                Number(date.slice(8,10)) - 1, // DD -- przypomnienie pojawi sie dzien przed koncem wypozyczenia/pozyczenia
+                Number(date.slice(11,13)), // hh
+                Number(date.slice(14,16)) // mm
+                )}
     };
    this.notifications.push(notification);
    if(this.platform.is('cordova')){
@@ -146,13 +153,6 @@ export class AddItemPage {
             alert.present();
         });
     }
-  }
-
-  getContacts(): void {
-    this.contacts.find(['name.formatted'], {filter: "", multiple: true})
-      .then(data => {
-        this.contactsList = data;
-    });
   }
 
 }
