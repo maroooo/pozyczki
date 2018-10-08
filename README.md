@@ -28,13 +28,13 @@ https://marvelapp.com/3gidh4c/screen/43391265
 
 | Zadanie | Osoba/y, która wykonywała | Czas pracy |
 | :---         |     :---:      |          ---: |
-| Instalacja i konfiguracja frameworku Ionic | Marek Ślósarczyk, Michał Feuer, Łukasz Luty | 4 |
+| Instalacja i konfiguracja frameworku [Ionic](https://ionicframework.com/docs/intro/installation/)  | Marek Ślósarczyk, Michał Feuer, Łukasz Luty | 4 |
 | Przygotowanie prototypu aplikacji | Marek Ślósarczyk | 9 |
 | Przygotowanie i stworzenie szkieletu aplikacji w frameworku Ionic | Marek Ślósarczyk | 1,5 |
-| Opracowanie uwierzytelniania użytkownika z pomocą Firebase Authentication | Michał Feuer | 4 |
-| Opracowanie sekcji tworzenia nowych przedmiotów z wykorzystaniem bazy danych Cloud Firestore | Łukasz Luty | 3 |
-| Dodanie pluginu obsługującego aparat | Łukasz Luty | 4 |
-| Instalacja i dodanie pluginu Contacts | Marek Ślósarczyk | 2 |
-| Zaprojektowanie, stworzenie i wygenerowanie ikony oraz ekranu startowego aplikacji | Marek Ślósarczyk, Michał Feuer, Łukasz Luty | 3 |
+| Opracowanie uwierzytelniania użytkownika z pomocą [Firebase Authentication] (https://firebase.google.com/docs/auth/) | Michał Feuer | 4 |
+| Opracowanie sekcji tworzenia nowych przedmiotów z wykorzystaniem bazy danych [Cloud Firestore](https://firebase.google.com/docs/firestore/) | Łukasz Luty | 3 |
+| Dodanie [pluginu obsługującego aparat] (https://ionicframework.com/docs/native/camera/) | Łukasz Luty | 4 |
+| Instalacja i dodanie [pluginu Contacts] (https://github.com/apache/cordova-plugin-contacts) | Marek Ślósarczyk | 2 |
+| Zaprojektowanie, stworzenie i wygenerowanie ikony oraz ekranu startowego aplikacji za pomocą [Hatchful](https://hatchful.shopify.com) | Marek Ślósarczyk, Michał Feuer, Łukasz Luty | 3 |
 | Edycja stron 'O nas' oraz 'Kontakt' | Łukasz Luty | 2 |
-| Instalacja i dodanie pluginu  Local Notifications | Michał Feuer | 3 |
+| Instalacja i dodanie pluginu  [Local Notifications](https://ionicframework.com/docs/native/local-notifications/) | Michał Feuer | 3 |
